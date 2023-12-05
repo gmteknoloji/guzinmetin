@@ -155,28 +155,18 @@ a {
       <script>
         document.getElementById('downloadButton').addEventListener('click', function() {
           // vCard içeriği oluşturuluyor
-          var vCardData = `
-        BEGIN:VCARD
-        VERSION:3.0
-        FN:Güzin Metin
-        TEL:+905336993021
-        END:VCARD
-          `;
+          var vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Güzin Metin\nTEL:+905336993021\nEND:VCARD";
+
         
-          // vCard dosyasını oluşturuluyor
-          var blob = new Blob([vCardData], { type: 'text/vcard' });
-        
-          // Bağlantı oluşturuluyor
-          var link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = 'metinsalman.vcf';
-        
-          // Bağlantıya tıklama işlemi tetikleniyor
-          document.body.appendChild(link);
-          link.click();
-        
-          // Bağlantıyı temizleme
-          document.body.removeChild(link);
+          var base64Data = btoa(vCardData);
+
+var link = document.createElement('a');
+link.href = 'data:text/vcard;base64,' + base64Data;
+link.download = 'guzinmetin.vcf';
+
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
         });
         </script>
 <script>
