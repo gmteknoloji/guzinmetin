@@ -169,14 +169,24 @@ a {
       </div>
       <script>
         document.getElementById('downloadButton').addEventListener('click', function() {
-          // vCard içeriği oluşturuluyor
-          var vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:Güzin Metin\nTEL:+905336993021\nEND:VCARD";
+          // vCard içeriği oluşturuluyor (iOS uyumlu)
+          var vCardData = "BEGIN:VCARD\n" +
+                          "VERSION:3.0\n" +
+                          "N:Metin;Güzin;;;\n" +
+                          "FN:Güzin Metin\n" +
+                          "ORG:GMTEKNOLOJİ\n" +
+                          "TITLE:FOUNDER\n" +
+                          "TEL;TYPE=CELL:+905336993021\n" +
+                          "EMAIL:guzinmetin@gmteknoloji.com\n" +
+                          "URL:https://www.gmteknoloji.com/\n" +
+                          "ADR;TYPE=WORK:;;Pınarbaşı mah. Hürriyet Cad. Akdeniz Üniversitesi, Antalya Teknokent Ar-Ge 2 Uluğbey binası no:3A/13;Konyaaltı;Antalya;;Türkiye\n" +
+                          "END:VCARD";
 
         
-          var base64Data = btoa(vCardData);
+          var base64Data = btoa(unescape(encodeURIComponent(vCardData)));
 
 var link = document.createElement('a');
-link.href = 'data:text/vcard;base64,' + base64Data;
+link.href = 'data:text/vcard;charset=utf-8;base64,' + base64Data;
 link.download = 'guzinmetin.vcf';
 
 document.body.appendChild(link);
